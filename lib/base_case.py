@@ -1,5 +1,7 @@
 import json.decoder
 from requests import Response
+from datetime import datetime
+
 
 class BaseCase:
     def get_cookie(self, response: Response, cookie_name):
@@ -18,3 +20,100 @@ class BaseCase:
 
         assert name in response_as_dict, f"Response JSON doesen't have key '{name}'"
         return response_as_dict[name]
+
+    def prepare_registration_data(self, email=None):
+        if email is None:
+            base_part = "learnqa"
+            domain = "example.com"
+            random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+            email = f"{base_part}{random_part}@{domain}"
+        return {
+            'password': '123',
+            'username': 'learnqa',
+            'firstName': 'learnqa',
+            'lastName': 'learnqa',
+            'email': email
+        }
+
+    def my_prepare_registration_data(self, email=None):
+        if email is None:
+            base_part = "work"
+            domain = "mail.ru"
+            email = f"{base_part}@{domain}"
+        return {
+            'password': '123',
+            'username': 'quakexpress',
+            'firstName': 'konstantin',
+            'lastName': 'voronov',
+            'email': email
+        }
+
+    def my_prepare_registration_data_2(self, email=None):
+        if email is None:
+            base_part = "work2"
+            domain = "mail.ru"
+            email = f"{base_part}@{domain}"
+        return {
+            'password': '123',
+            'username': 'quakexpress2',
+            'firstName': 'konstantin2',
+            'lastName': 'voronov2',
+            'email': email
+        }
+
+    def prepare_bad_registration_email(self, email=None):
+        if email is None:
+            base_part = "learnqa"
+            domain = "example.com"
+            random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+            email = f"{base_part}{random_part}{domain}"
+        return {
+            'password': '123',
+            'username': 'learnqa',
+            'firstName': 'learnqa',
+            'lastName': 'learnqa',
+            'email': email
+        }
+
+    def prepare_without_registration_field(self, email=None):
+        if email is None:
+            base_part = "learnqa"
+            domain = "example.com"
+            random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+            email = f"{base_part}{random_part}@{domain}"
+        return {
+            'password': '123',
+            'firstName': 'learnqa',
+            'lastName': 'learnqa',
+            'email': email
+        }
+
+    def prepare_short_registration_username(self, email=None):
+        if email is None:
+            base_part = "learnqa"
+            domain = "example.com"
+            random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+            email = f"{base_part}{random_part}@{domain}"
+        return {
+            'password': '123',
+            'username': 'l',
+            'firstName': 'learnqa',
+            'lastName': 'learnqa',
+            'email': email
+        }
+
+    def prepare_long_registration_username(self, email=None):
+        if email is None:
+            base_part = "learnqa"
+            domain = "example.com"
+            random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+            email = f"{base_part}{random_part}@{domain}"
+        return {
+            'password': '123',
+            'username': 'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest'
+                        'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest'
+                        'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+            'firstName': 'learnqa',
+            'lastName': 'learnqa',
+            'email': email
+        }
